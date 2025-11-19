@@ -98,7 +98,26 @@ export const INITIAL_DATA: ResumeData = {
       description: "• Automating cloud resource provisioning with Terraform scripts to streamline environment setup.\n• Containerized development and testing workflows using Docker, reducing environment configuration time.\n• Managed Kubernetes resources including namespaces, ConfigMaps, and Secrets for microservices architecture."
     }
   ],
-  projects: [], 
+  projects: [
+    {
+      id: 'proj1',
+      name: "Kube-Guardian (AIOps)",
+      techStack: "Kubernetes, Gemini AI, Go, Python",
+      link: "https://kube-guardian-3112339576.us-west1.run.app",
+      startDate: "2024",
+      endDate: "Active",
+      description: "AI-driven incident resolution agent for Kubernetes. Detects pod failures, analyzes logs using LLMs to identify root causes, and automatically generates YAML patches for remediation."
+    },
+    {
+      id: 'proj2',
+      name: "SafeDrive Telemetry",
+      techStack: "IoT, Cloud Run, TypeScript, Google Maps API",
+      link: "https://safedrive-643111877560.us-west1.run.app",
+      startDate: "2024",
+      endDate: "Active",
+      description: "High-frequency telemetry processing engine. Ingests real-time accelerometer data to analyze driving behavior and eliminates GPS drift using advanced signal smoothing algorithms."
+    }
+  ], 
   education: [
     {
       id: 'edu1',

@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { ResumeData } from '../types';
-import { Terminal, Server, Cloud, Github, Linkedin, Mail, Cpu, Globe, ExternalLink, ChevronRight, MapPin, ShieldCheck, Code, Send, Lock, CheckCircle, Copy, Download, GraduationCap, FolderGit2 } from 'lucide-react';
+import { Terminal, Server, Cloud, Github, Linkedin, Mail, Cpu, Globe, ExternalLink, ChevronRight, MapPin, ShieldCheck, Code, Send, Lock, CheckCircle, Copy, Download, GraduationCap, FolderGit2, Link as LinkIcon, Activity } from 'lucide-react';
 
 interface PortfolioProps {
   data: ResumeData;
@@ -10,6 +11,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
   
   const [handshakeStatus, setHandshakeStatus] = useState<'idle' | 'connecting' | 'connected'>('idle');
   const [activeTab, setActiveTab] = useState('console');
+  const [emailCopied, setEmailCopied] = useState(false);
 
   // Helper to strip markdown for clean text
   const cleanText = (text: string) => text.replace(/\*\*/g, '');
@@ -31,6 +33,17 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
       const resultDiv = document.getElementById('handshake-result');
       if (resultDiv) resultDiv.scrollIntoView({ behavior: 'smooth' });
     }, 2000);
+  };
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(data.personalInfo.email);
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2000);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert("Portfolio URL copied to clipboard!");
   };
 
   // Helper to highlight tech keywords in text to make it look different from resume
@@ -220,20 +233,46 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
       {data.projects.length > 0 && (
         <section id="projects" className="px-6 py-20 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-            <FolderGit2 className="text-purple-500" /> 
-            <span>Active Repositories</span>
+            <Activity className="text-purple-500" /> 
+            <span>Mission Critical Deployments</span>
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {data.projects.map((proj) => (
-              <div key={proj.id} className="bg-slate-900/80 border border-slate-700 p-6 rounded-xl hover:bg-slate-800 transition-all group">
-                 <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">{proj.name}</h3>
-                    <a href={proj.link || '#'} className="text-slate-500 hover:text-white"><ExternalLink size={18}/></a>
+              <div key={proj.id} className="bg-slate-900/80 border border-slate-700 p-6 rounded-xl hover:border-blue-500/50 transition-all group relative overflow-hidden flex flex-col">
+                 
+                 {/* Header: Status & Region */}
+                 <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-800/50">
+                    <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse"></div>
+                        <span className="text-xs font-mono text-emerald-400 font-bold tracking-wider">SERVICE_HEALTHY</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-500 font-mono">
+                        <Cloud size={12} />
+                        <span>us-west1</span>
+                    </div>
                  </div>
-                 <div className="text-xs font-mono text-blue-400 mb-4">{proj.techStack}</div>
-                 <p className="text-slate-400 text-sm leading-relaxed mb-4">{proj.description}</p>
-                 <div className="text-xs text-slate-600 font-mono border-t border-slate-800 pt-2 mt-auto">
-                    Last Commit: {proj.endDate || 'Running'}
+
+                 {/* Title & Tech */}
+                 <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors mb-2">{proj.name}</h3>
+                 <div className="flex flex-wrap gap-2 mb-4">
+                    {proj.techStack.split(',').map((tech, i) => (
+                        <span key={i} className="px-2 py-0.5 bg-blue-900/20 text-blue-300 text-[10px] font-mono rounded border border-blue-500/10">
+                            {tech.trim()}
+                        </span>
+                    ))}
+                 </div>
+
+                 {/* Description */}
+                 <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow border-l-2 border-slate-800 pl-3 ml-1">
+                    {proj.description}
+                 </p>
+
+                 {/* Action Button */}
+                 <div className="mt-auto">
+                    <a href={proj.link} target="_blank" rel="noopener noreferrer" className="w-full group/btn flex items-center justify-center gap-3 bg-slate-800 hover:bg-blue-600 text-white py-3 rounded-lg font-mono text-sm font-bold transition-all border border-slate-700 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+                        <span>ACCESS_ENDPOINT</span>
+                        <ExternalLink size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
                  </div>
               </div>
             ))}
@@ -362,10 +401,18 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
                         <span className="text-slate-200 font-medium">{data.personalInfo.email}</span>
                      </div>
                      <button 
-                      onClick={() => navigator.clipboard.writeText(data.personalInfo.email)}
-                      className="text-slate-500 hover:text-blue-400 transition-colors p-2" title="Copy Email"
+                      onClick={handleCopyEmail}
+                      className={`transition-all p-2 rounded flex items-center gap-2 ${emailCopied ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-500 hover:text-blue-400 hover:bg-slate-800'}`}
+                      title="Copy Email"
                      >
-                        <Copy size={16} />
+                        {emailCopied ? (
+                          <>
+                            <CheckCircle size={16} />
+                            <span className="text-xs font-mono font-bold">COPIED</span>
+                          </>
+                        ) : (
+                          <Copy size={16} />
+                        )}
                      </button>
                   </div>
                   
@@ -384,8 +431,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-slate-700 text-sm font-mono border-t border-slate-900 mt-12">
+      <footer className="py-8 flex flex-col items-center gap-4 text-center text-slate-700 text-sm font-mono border-t border-slate-900 mt-12">
         <p>SYSTEM STATUS: OPTIMAL // &copy; {new Date().getFullYear()} {data.personalInfo.fullName}</p>
+        <button onClick={copyToClipboard} className="flex items-center gap-2 text-slate-600 hover:text-blue-400 transition-colors">
+          <LinkIcon size={14} /> Copy Portfolio Link
+        </button>
       </footer>
       
       <style>{`
