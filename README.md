@@ -1,20 +1,58 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Nithesh Kolluri - Cloud & DevOps Portfolio
 
-# Run and deploy your AI Studio app
+A high-performance, CLI-themed interactive portfolio website designed for a Cloud & DevOps Engineer. This project highlights infrastructure-as-code principles, CI/CD expertise, and AI integration through a unique terminal-inspired user interface.
 
-This contains everything you need to run your app locally.
+## 🚀 Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1zjURPI5xt8FLfK9QFDZ6NpwWwbjXi1yh
+*   **CLI-Themed UI:** A developer-centric interface featuring terminal simulations and code-like visuals.
+*   **Interactive Elements:** "Handshake" protocol for secure contact details and holographic card effects.
+*   **Responsive Design:** Fully optimized for mobile, tablet, and desktop experiences.
+*   **Type-Safe:** Built with strict TypeScript interfaces for reliability.
 
-## Run Locally
+## 🛠️ Tech Stack
 
-**Prerequisites:**  Node.js
+*   **Frontend:** React 18, TypeScript
+*   **Styling:** Tailwind CSS
+*   **Icons:** Lucide React
+*   **Build Tool:** Vite
+*   **Deployment:** Docker / Google Cloud Run (Compatible with Vercel/Netlify)
 
+## 🏃‍♂️ Running Locally
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/nitheshkolluri/portfolio.git
+    cd portfolio
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for production:**
+    ```bash
+    npm run build
+    ```
+
+## 📂 Project Structure
+
+```
+.
+├── components/       # React components (Portfolio, etc.)
+├── services/         # API services and utilities
+├── types.ts          # TypeScript definitions and Initial Data
+├── App.tsx           # Main application entry point
+├── index.html        # HTML entry point
+├── tailwind.config.js# Tailwind configuration
+└── vite.config.ts    # Vite build configuration
+```
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).

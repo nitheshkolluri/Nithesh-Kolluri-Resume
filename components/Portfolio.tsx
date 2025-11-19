@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { ResumeData } from '../types';
-import { Terminal, Server, Cloud, Github, Linkedin, Mail, Cpu, Globe, ExternalLink, ChevronRight, MapPin, ShieldCheck, Code, Send, Lock, CheckCircle, Copy, Download } from 'lucide-react';
+import { Terminal, Server, Cloud, Github, Linkedin, Mail, Cpu, Globe, ExternalLink, ChevronRight, MapPin, ShieldCheck, Code, Send, Lock, CheckCircle, Copy, Download, GraduationCap, FolderGit2 } from 'lucide-react';
 
 interface PortfolioProps {
   data: ResumeData;
@@ -59,6 +58,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
         <div className="flex gap-6 text-sm font-medium items-center">
           <button onClick={() => scrollToSection('about')} className="hover:text-blue-400 transition-colors hidden md:block">Console</button>
           <button onClick={() => scrollToSection('stack')} className="hover:text-blue-400 transition-colors hidden md:block">Stack</button>
+          <button onClick={() => scrollToSection('projects')} className="hover:text-blue-400 transition-colors hidden md:block">Projects</button>
           <button onClick={() => scrollToSection('experience')} className="hover:text-blue-400 transition-colors hidden md:block">Deployments</button>
           <button 
             onClick={() => scrollToSection('contact')}
@@ -216,6 +216,31 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
         </div>
       </section>
 
+      {/* Projects Section (New) */}
+      {data.projects.length > 0 && (
+        <section id="projects" className="px-6 py-20 max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-12 flex items-center gap-3">
+            <FolderGit2 className="text-purple-500" /> 
+            <span>Active Repositories</span>
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {data.projects.map((proj) => (
+              <div key={proj.id} className="bg-slate-900/80 border border-slate-700 p-6 rounded-xl hover:bg-slate-800 transition-all group">
+                 <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">{proj.name}</h3>
+                    <a href={proj.link || '#'} className="text-slate-500 hover:text-white"><ExternalLink size={18}/></a>
+                 </div>
+                 <div className="text-xs font-mono text-blue-400 mb-4">{proj.techStack}</div>
+                 <p className="text-slate-400 text-sm leading-relaxed mb-4">{proj.description}</p>
+                 <div className="text-xs text-slate-600 font-mono border-t border-slate-800 pt-2 mt-auto">
+                    Last Commit: {proj.endDate || 'Running'}
+                 </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Experience Timeline */}
       <section id="experience" className="px-6 py-24 max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-16 flex items-center gap-3">
@@ -250,7 +275,6 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
                  <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                     {exp.description.split('\n').map((line, idx) => {
                        if (!line.trim()) return null;
-                       // Enhanced visualization for portfolio: split bold headers
                        const parts = line.split(/(\*\*.*?\*\*)/);
                        const hasHeader = parts.some(p => p.startsWith('**'));
 
@@ -260,10 +284,8 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
                            <div className="w-full">
                             {parts.map((part, pIdx) => {
                                 if (part.startsWith('**')) {
-                                   // Make headers block-level and colored in portfolio
                                    return <div key={pIdx} className="text-white font-bold mb-1 text-base border-b border-slate-800 pb-1 inline-block">{part.slice(2, -2)}</div>
                                 }
-                                // Highlight tech terms in the body
                                 return <span key={pIdx} className="text-slate-400">{highlightTech(part)}</span>
                             })}
                            </div>
@@ -275,6 +297,23 @@ const Portfolio: React.FC<PortfolioProps> = ({ data }) => {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Education Section (New) */}
+      <section id="education" className="px-6 py-12 max-w-5xl mx-auto border-t border-slate-900">
+         <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+            <GraduationCap className="text-slate-500" /> 
+            <span>Academic Credentials</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-4">
+             {data.education.map((edu) => (
+                <div key={edu.id} className="bg-slate-900/30 p-4 rounded border border-slate-800/50">
+                   <div className="text-emerald-400 font-bold text-sm mb-1">{edu.degree}</div>
+                   <div className="text-slate-300 text-sm">{edu.institution}</div>
+                   <div className="text-slate-500 text-xs mt-2">{edu.year}</div>
+                </div>
+             ))}
+          </div>
       </section>
 
       {/* Interactive Contact - The "Handshake" */}
