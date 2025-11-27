@@ -1,4 +1,5 @@
 
+
 export interface ResumeData {
   personalInfo: {
     fullName: string;
@@ -75,7 +76,7 @@ export const INITIAL_DATA: ResumeData = {
       startDate: "Mar 2024",
       endDate: "Jun 2024",
       current: false,
-      description: "• Optimized the deployment of an internal LLM (Gemma 7B) on local infrastructure, achieving a 50% reduction in response latency.\n• Integrated Prometheus and Grafana for real-time monitoring of model performance and system resources.\n• Configured network isolation policies to secure the deployment environment against unauthorized access.\n• Conducted cost analysis of deployment models, implementing optimizations that reduced operational expenses by 15%."
+      description: "Optimized the deployment of an internal LLM (Gemma 7B) on local infrastructure, achieving a 50% reduction in response latency.\nIntegrated Prometheus and Grafana for real-time monitoring of model performance and system resources.\nConfigured network isolation policies to secure the deployment environment against unauthorized access.\nConducted cost analysis of deployment models, implementing optimizations that reduced operational expenses by 15%."
     },
     {
       id: 'exp4',
@@ -85,7 +86,7 @@ export const INITIAL_DATA: ResumeData = {
       startDate: "May 2021",
       endDate: "Jun 2022",
       current: false,
-      description: "• Provisioned Azure AKS clusters, SQL databases, and Virtual Machines using Terraform for reproducible infrastructure.\n• Built and maintained automated CI/CD pipelines in Azure DevOps, reducing manual deployment efforts by 60%.\n• Managed identity and access policies via Azure Entra ID to enforce least-privilege security principles.\n• Centralized application logging and metrics using Azure Monitor to improve system observability."
+      description: "Provisioned Azure AKS clusters, SQL databases, and Virtual Machines using Terraform for reproducible infrastructure.\nBuilt and maintained automated CI/CD pipelines in Azure DevOps, reducing manual deployment efforts by 60%.\nManaged identity and access policies via Azure Entra ID to enforce least-privilege security principles.\nCentralized application logging and metrics using Azure Monitor to improve system observability."
     },
     {
       id: 'exp5',
@@ -95,7 +96,7 @@ export const INITIAL_DATA: ResumeData = {
       startDate: "Sep 2019",
       endDate: "Oct 2020",
       current: false,
-      description: "• Automating cloud resource provisioning with Terraform scripts to streamline environment setup.\n• Containerized development and testing workflows using Docker, reducing environment configuration time.\n• Managed Kubernetes resources including namespaces, ConfigMaps, and Secrets for microservices architecture."
+      description: "Automated cloud resource provisioning with Terraform scripts to streamline environment setup, reducing manual configuration time by 40%.\nContainerized development and testing workflows using Docker, cutting testing cycle times by 25%.\nManaged Kubernetes resources including namespaces, ConfigMaps, and Secrets for microservices architecture."
     }
   ],
   projects: [
